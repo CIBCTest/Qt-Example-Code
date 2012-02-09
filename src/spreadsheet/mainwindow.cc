@@ -1,7 +1,7 @@
 #include <QtGui>
 
 #include "../finddialog/FindDialog.h"
-#include "../gotocell/gotocellDialog.h"
+#include "../gotocell/gotocelldialog.h"
 #include "mainwindow.h"
 #include "../sort/sortdialog.h"
 #include "spreadsheet.h"
@@ -112,7 +112,7 @@ void MainWindow::goToCell()
 void MainWindow::sort()
 {
 	SortDialog dialog(this);
-	auto range = spreadsheet->selectedRange();
+	QTableWidgetSelectionRange range = spreadsheet->selectedRange();
 	dialog.setColumnRange('A' + range.leftColumn(), 'A' + range.rightColumn());
 	if (dialog.exec())
 	{

@@ -62,7 +62,7 @@ QVariant Cell::value() const
 		else if (formulaStr.startsWith('='))
 		{
 			cachedValue = Invalid;
-			auto expr = formulaStr.mid(1);
+			QString expr = formulaStr.mid(1);
 			expr.replace(" ", "");
 			expr.append(QChar::Null);
 			
@@ -107,7 +107,7 @@ QVariant Cell::evalExpression(const QString& str, int& pos) const
 
 QVariant Cell::evalTerm(const QString& str, int& pos) const
 {
-	auto result = evalFactor(str, pos);
+	QVariant result = evalFactor(str, pos);
 	while (str[pos] != QChar::Null)
 	{
 		QChar op = str[pos];
@@ -115,7 +115,7 @@ QVariant Cell::evalTerm(const QString& str, int& pos) const
 			return result;
 		++pos;
 		
-		auto factor = evalFactor(str, pos);
+		QVariant factor = evalFactor(str, pos);
 		if (result.type() == QVariant::Double && factor.type() == QVariant::Double)
 		{
 			if (op == '*')
@@ -167,7 +167,7 @@ QVariant Cell::evalFactor(const QString& str, int& pos) const
 			int column = token[0].toUpper().unicode() - 'A';
 			int row = token.mid(1).toInt() - 1;
 			
-			auto c = static_cast<Cell*>(tableWidget()->item(row, column));
+			Cell* c = static_cast<Cell*>(tableWidget()->item(row, column));
 			if (c)
 				result = c->value();
 			else

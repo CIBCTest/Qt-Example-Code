@@ -23,7 +23,7 @@ void Spreadsheet::cut()
 
 void Spreadsheet::copy()
 {
-	auto range = selectedRange();
+	QTableWidgetSelectionRange range = selectedRange();
 	QString str;
 	
 	for (int i = 0; i < range.rowCount(); ++i)
@@ -42,9 +42,9 @@ void Spreadsheet::copy()
 
 void Spreadsheet::paste()
 {
-	auto range = selectedRange();
-	auto str = QApplication::clipboard()->text();
-	auto rows = str.split('\n');
+	QTableWidgetSelectionRange range = selectedRange();
+	QString str = QApplication::clipboard()->text();
+	QStringList rows = str.split('\n');
 	int numRows = rows.count();
 	int numColumns = rows.first().count('\t') + 1;
 	
@@ -59,7 +59,7 @@ void Spreadsheet::paste()
 	
 	for (int i = 0; i < numRows; ++i)
 	{
-		auto columns = rows[i].split('\t');
+		QStringList columns = rows[i].split('\t');
 		for (int j = 0; j < numColumns; ++j)
 		{
 			int row = range.topRow() + i;
@@ -74,10 +74,10 @@ void Spreadsheet::paste()
 
 void Spreadsheet::del()
 {
-	auto items = selectedItems();
+	QList<QTableWidgetItem*> items = selectedItems();
 	if (!items.isEmpty())
 	{	
-		foreach (auto item, items)
+		foreach (QTableWidgetItem* item, items)
 			delete item;
 		somethingChanged();
 	}
@@ -187,7 +187,7 @@ void Spreadsheet::clear()
 	
 	for (int i = 0; i < ColumnCount; ++i)
 	{
-		auto item = new QTableWidgetItem;
+		QTableWidgetItem* item = new QTableWidgetItem;
 		item->setText(QString(QChar('A' + i)));
 		setHorizontalHeaderItem(i, item);
 	}
@@ -265,7 +265,7 @@ bool Spreadsheet::writeFile(const QString& fileName)
 
 QTableWidgetSelectionRange Spreadsheet::selectedRange() const
 {
-	auto ranges = selectedRanges();
+	QList<QTableWidgetSelectionRange> ranges = selectedRanges();
 	if (ranges.isEmpty())
 		return QTableWidgetSelectionRange();
 	return ranges.first();
@@ -302,7 +302,7 @@ void Spreadsheet::setFormula(int row, int column, const QString& formula)
 void Spreadsheet::sort(const SpreadsheetCompare& compare)
 {
 	QList<QStringList> rows;
-	auto range = selectedRange();
+	QTableWidgetSelectionRange range = selectedRange();
 		
 	for (int i = 0; i < range.rowCount(); ++i)
 	{
