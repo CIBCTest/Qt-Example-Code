@@ -1,0 +1,6 @@
+*.dll
+*.pdb
+*.ilk
+*.exe
+*.idb
+*.vcxproj*
