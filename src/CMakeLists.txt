@@ -24,7 +24,7 @@ QT4_WRAP_CPP(QtExampleSpreadsheet_HEADERS_MOC ${QtExampleSpreadsheet_HEADERS})
 INCLUDE(${QT_USE_FILE})
 ADD_DEFINITIONS(${QT_DEFINITIONS})
 
-ADD_EXECUTABLE(spreadsheet 
+ADD_EXECUTABLE(spreadsheet_example
 ${QtExampleSpreadsheet_SOURCES}
 ${QtExampleSpreadsheet_HEADERS_MOC})
-TARGET_LINK_LIBRARIES(spreadsheet ${QT_LIBRARIES})
+TARGET_LINK_LIBRARIES(spreadsheet_example ${QT_LIBRARIES})
