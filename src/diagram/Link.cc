@@ -28,6 +28,11 @@ void Link::setColor(const QColor& color)
   setPen(QPen(color, 1.0));
 }
 
+QColor Link::color() const
+{
+  return pen().color();
+}
+
 void Link::trackNodes()
 {
   setLine(QLineF(myFromNode_->pos(), myToNode_->pos()));

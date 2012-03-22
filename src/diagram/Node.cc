@@ -8,7 +8,7 @@ Node::Node()
   outlineColor_ = Qt::darkBlue;
   backgroundColor_ = Qt::white;
 
-  setFlags(ItemIsMovable | ItemIsSelectable);
+  setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
 }
 
 Node::~Node()

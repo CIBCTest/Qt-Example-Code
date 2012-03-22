@@ -5,6 +5,11 @@
 
 class Node;
 class Link;
+class QMenu;
+class QToolBar;
+class QAction;
+class QGraphicsScene;
+class QGraphicsView;
 
 class DiagramWindow : public QMainWindow
 {
@@ -40,7 +45,14 @@ private:
   QMenu* editMenu_;
   QToolBar* editToolBar_;
   QAction* exitAction_;
-  //...
+  QAction* cutAction_;
+  QAction* copyAction_;
+  QAction* pasteAction_;
+  QAction* deleteAction_;
+  QAction* addLinkAction_;
+  QAction* addNodeAction_;
+  QAction* bringToFrontAction_;
+  QAction* sendToBackAction_;
   QAction* propertiesAction_;
 
   QGraphicsScene* scene_;
